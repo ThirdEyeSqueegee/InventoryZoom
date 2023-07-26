@@ -20,9 +20,8 @@ namespace Events {
                         const auto id = button->GetIDCode();
                         const auto device = button->GetDevice();
                         if (device == RE::INPUT_DEVICE::kKeyboard) {
-                            if (id == 42 && button->IsHeld()) {
-                                Utility::shift_held = true;
-                            }
+                            if (id == 42 && button->IsHeld()) Utility::shift_held = true;
+                            if (id == 42 && button->IsUp() && Utility::shift_held) Utility::shift_held = false;
                         }
                         if (device == RE::INPUT_DEVICE::kMouse) {
                             const auto scancode = SKSE::InputMap::kMacro_MouseButtonOffset + id;
